@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Todo List</title>
+  <script src="./js/vue.min.js"></script>
+  <script src="./js/index.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fonts/iconfont.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="main">
+
+      <div class="search_input">
+        <div class="search_input_left icon iconfont icon-search"></div>
+        <div class="search_input_textContainer">
+          <input
+            type="text"
+            placeholder="搜索/添加"
+            id="search_input"
+            class="search_input_text"
+          />
+          <!-- 防抖搜索 -->
+          <div class="search_input_right icon iconfont icon-add"></div>
+          <!-- 绑定 添加按钮 -->
+        </div>
+    </div>
+      
+    <div class="search_option">
+      <span>全部</span>
+      <span>完成</span>
+      <span>未完成</span>
+    </div>
+
+    <div class="search_result">
+      <div class="result_list">
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+
+        <div class="result_block">
+          <div class="left">
+            <input type="checkbox" class="checkbox">
+          </div>
+          <div class="content">
+            <p>{{content}}</p>
+          </div>
+          <div class="right">
+            <span>删除</span>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>
