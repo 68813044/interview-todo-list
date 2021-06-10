@@ -20,118 +20,40 @@
         <div class="search_input_left icon iconfont icon-search"></div>
         <div class="search_input_textContainer">
           <input
+            @keyup.enter="search()"
             type="text"
             placeholder="搜索/添加"
             id="search_input"
             class="search_input_text"
+            v-model="inputText"
           />
           <!-- 防抖搜索 -->
-          <div class="search_input_right icon iconfont icon-add"></div>
+          <div @click="addItem" class="search_input_right icon iconfont icon-add btn"></div>
           <!-- 绑定 添加按钮 -->
         </div>
     </div>
       
     <div class="search_option">
-      <span>全部</span>
-      <span>完成</span>
-      <span>未完成</span>
+      <span class="active">全部</span>
+      <span class="btn">以完成</span>
+      <span class="btn">未完成</span>
     </div>
 
     <div class="search_result">
       <div class="result_list">
-        <div class="result_block">
-          <div class="left">
-            <input type="checkbox" class="checkbox">
-          </div>
-          <div class="content">
-            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-          </div>
-          <div class="right">
-            <span>删除</span>
-          </div>
-        </div>
-        <div class="result_block">
-          <div class="left">
-            <input type="checkbox" class="checkbox">
-          </div>
-          <div class="content">
-            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-          </div>
-          <div class="right">
-            <span>删除</span>
-          </div>
-        </div>
-        <div class="result_block">
-          <div class="left">
-            <input type="checkbox" class="checkbox">
-          </div>
-          <div class="content">
-            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-          </div>
-          <div class="right">
-            <span>删除</span>
-          </div>
-        </div>
-        <div class="result_block">
-          <div class="left">
-            <input type="checkbox" class="checkbox">
-          </div>
-          <div class="content">
-            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-          </div>
-          <div class="right">
-            <span>删除</span>
-          </div>
-        </div>
-        <div class="result_block">
-          <div class="left">
-            <input type="checkbox" class="checkbox">
-          </div>
-          <div class="content">
-            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-          </div>
-          <div class="right">
-            <span>删除</span>
-          </div>
-        </div>
 
-        <div class="result_block">
+        <div class="result_block" v-for="(item,id) in list" :key="id">
           <div class="left">
-            <input type="checkbox" class="checkbox">
+            <input type="checkbox" class="checkbox" v-model="item.isFinish" @change="updateItem(item)">
           </div>
-          <div class="content">
-            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
+          <div class="content" v-bind:class="{isFinish: item.isFinish }">
+            <p>{{item.content}}</p>
           </div>
-          <div class="right">
+          <div class="right btn" @click="delItem(item)">
             <span>删除</span>
           </div>
         </div>
-
-        <div class="result_block">
-          <div class="left">
-            <input type="checkbox" class="checkbox">
-          </div>
-          <div class="content">
-            <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</p>
-          </div>
-          <div class="right">
-            <span>删除</span>
-          </div>
-        </div>
-
-        <div class="result_block">
-          <div class="left">
-            <input type="checkbox" class="checkbox">
-          </div>
-          <div class="content">
-            <p>{{content}}</p>
-          </div>
-          <div class="right">
-            <span>删除</span>
-          </div>
-        </div>
-
-
+        
       </div>
     </div>
 
