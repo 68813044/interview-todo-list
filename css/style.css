@@ -28,8 +28,12 @@ body{
   z-index: 1;
   width: 80%;
   max-width: 840px;
-  margin: 80px auto 0;
+  margin: 40px auto 0;
   text-align: center;
+}
+.title{
+  font-weight: 500;
+  font-size: 24px;
 }
 input{
   outline: none;
@@ -52,7 +56,7 @@ input{
 /* search */
 
 .search_input {
-  margin-top: 48px;
+  margin-top: 30px;
   position: relative;
 }
 .search_input_right {
