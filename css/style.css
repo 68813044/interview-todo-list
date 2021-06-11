@@ -98,6 +98,7 @@ input{
 }
 .search_option span{
   margin-right: 6px;
+  cursor: pointer;
 }
 
 /* search_result */
@@ -115,6 +116,15 @@ input{
   max-width: 840px;
   background-color: #fff;
   border-radius: 12px;
+}
+
+.editContent{
+	margin: 0;
+	width: 100%;
+	line-height: 1.4em;
+  font-size: 16px;
+	padding: 2px;
+	border: 1px solid #999;
 }
 
 /* result-block  */

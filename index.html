@@ -20,38 +20,44 @@
         <div class="search_input_left icon iconfont icon-search"></div>
         <div class="search_input_textContainer">
           <input
-            @keyup.enter="search()"
+            @keyup.enter="addItem()"
             type="text"
-            placeholder="搜索/添加"
+            placeholder="搜索/回车或右侧添加"
             id="search_input"
             class="search_input_text"
             v-model="inputText"
           />
-          <!-- 防抖搜索 -->
           <div @click="addItem" class="search_input_right icon iconfont icon-add btn"></div>
           <!-- 绑定 添加按钮 -->
         </div>
     </div>
       
     <div class="search_option">
-      <span class="active">全部</span>
-      <span class="btn">以完成</span>
-      <span class="btn">未完成</span>
+      <span @click="changeOption('all')" :class="{active : showOption == 'all'}">全部</span>
+      <span @click="changeOption('finish')" :class="{active : showOption == 'finish'}">以完成</span>
+      <span @click="changeOption('noFinish')" :class="{active : showOption == 'noFinish'}">未完成</span>
     </div>
 
     <div class="search_result">
       <div class="result_list">
 
-        <div class="result_block" v-for="(item,id) in list" :key="id">
+        <div class="result_block" v-for="(item) in filteredList" :key="item.id">
           <div class="left">
-            <input type="checkbox" class="checkbox" v-model="item.isFinish" @change="updateItem(item)">
+            <input type="checkbox" v-model="item.isFinish">
           </div>
           <div class="content" v-bind:class="{isFinish: item.isFinish }">
-            <p>{{item.content}}</p>
+            <p @dblclick="toEdit(item)" v-show="!(editItem === item)">{{item.content}}</p>
+            <input
+            class="editContent"
+            type="text"
+            v-show="item === editItem"
+            v-model="item.content"
+            v-item-focus="item === editItem"
+            @blur="doneEdit(item)"
+            @keyup.enter="doneEdit(item)"
+          />
           </div>
-          <div class="right btn" @click="delItem(item)">
-            <span>删除</span>
-          </div>
+          <div class="right btn" @click="delItem(item)"><span>删除</span></div>
         </div>
         
       </div>
