@@ -22,7 +22,7 @@ class TodoList extends Component{
     const todoListElements = []
     for (let i = 0; i < todoList.length; i++) {
       const item = todoList[i];
-      if(item.content.indexOf(this.props.filterKey) != -1){
+      if(item.content.indexOf(this.props.filterKey) !== -1){
         todoListElements.push(
           <TodoItem 
           todoItem={item}

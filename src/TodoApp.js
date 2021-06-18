@@ -24,7 +24,7 @@ class TodoApp extends Component {
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.setState({
       todoList:listStorage.fetch()
     })

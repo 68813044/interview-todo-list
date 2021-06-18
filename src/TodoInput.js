@@ -39,10 +39,6 @@ class TodoInput extends Component{
     this.props.updateFilterKey(inputText)
   }
 
-  toSearch(){
-    
-  }
-  
   render () {
     return(
       <div className="search_input">
