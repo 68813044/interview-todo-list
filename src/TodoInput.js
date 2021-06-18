@@ -16,6 +16,9 @@ class TodoInput extends Component{
 
 
   toAddItem(){
+    if(this.state.inputText === ''){
+      return alert('请输入待办内容')
+    }
     if (this.props.onSubmit) {
       this.props.onSubmit({
         id:( new Date()).valueOf(),

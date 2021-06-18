@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState,useEffect } from 'react'
 import TodoInput from './TodoInput.js'
 import TodoList from './TodoList.js'
 
@@ -15,73 +15,69 @@ var listStorage = {
 };
 
 
-class TodoApp extends Component {
-  constructor () {
-    super()
-    this.state = {
-      todoList: [],
-      filterKey:''
-    }
-  }
+const TodoApp = () => {
+  const [todoList,setTodoList] = useState([])
+  const [filterKey,setFilterKey] = useState('')
 
-  componentDidMount(){
-    this.setState({
-      todoList:listStorage.fetch()
-    })
-  }
+  useEffect(() => {
+    const temp = listStorage.fetch()
+    setTodoList(temp)
+  }, [])
 
-  _saveTodoList(todoList){
+  const _saveTodoList = (todoList) => {
     listStorage.save(todoList)
   }
 
-  addItem(todoItem){
-    if(this.inputText === ''){
-      return alert('请输入待办内容')
-    }
+  const addItem = (todoItem) => {
     console.log("addItem：",todoItem)
-    const todoList = this.state.todoList
-    todoList.push(todoItem)
-    this.setState({ todoList })
-    this._saveTodoList(todoList)
+    const list = [
+      ...todoList,
+      todoItem
+    ]
+    setTodoList(list)
+    updateFilterKey('')
+    _saveTodoList(list)
   }
 
-  deleteItem(index){
-    const todoList = this.state.todoList
-    todoList.splice(index, 1)
-    this.setState({ todoList })
-    this._saveTodoList(todoList)
+  const deleteItem = (index) => {
+    const list = todoList.filter((item,i) => {
+      return i!==index
+    })
+    setTodoList(list)
+    _saveTodoList(list)
   }
 
-  updateItem(index){
-    const todoList = this.state.todoList
-    todoList[index].isFinish = !todoList[index].isFinish
-    this.setState({ todoList })
-    this._saveTodoList(todoList)
+  const updateItem = (index) => {
+    const list = todoList.map((item,i) => {
+      if(i === index){
+        item.isFinish = !item.isFinish
+      }
+      return item
+    })
+    console.log("new list:",list)
+    setTodoList(list)
+    _saveTodoList(list)
   }
 
-  updateFilterKey(filterKey){
-    this.setState({ filterKey })
+  const updateFilterKey = (filterKey) => {
+    setFilterKey(filterKey)
   }
 
+  return (
+    <div className="main">
+      <div className="title">My Todo List</div>
 
-  render(){
-    return (
-      <div className="main">
-        <div className="title">My Todo List</div>
+      <TodoInput 
+        updateFilterKey={updateFilterKey}
+        onSubmit={addItem}/> 
 
-        <TodoInput 
-          updateFilterKey={this.updateFilterKey.bind(this)}
-          onSubmit={this.addItem.bind(this)}/> 
-
-        <TodoList 
-          todoList={this.state.todoList}
-          filterKey={this.state.filterKey}
-          onDeleteItem={this.deleteItem.bind(this)}
-          onUpdateItem={this.updateItem.bind(this)}/>
-
-      </div>
-    )
-  }
+      <TodoList 
+        todoList={todoList}
+        filterKey={filterKey}
+        onDeleteItem={deleteItem}
+        onUpdateItem={updateItem}/>
+    </div>
+  )
 }
 
 export default TodoApp
