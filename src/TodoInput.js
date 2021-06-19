@@ -1,69 +1,56 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 
-class TodoInput extends Component{
-  static propTypes = {
-    updateFilterKey: PropTypes.func,
-    onSubmit: PropTypes.func
-  }
+const TodoInput = (props) => {
+  
+  const [inputText,setInputText] = useState('')
 
-  constructor(){
-    super()
-    this.state = {
-      inputText:''
-    }
-  }
-
-
-  toAddItem(){
-    if(this.state.inputText === ''){
+  const toAddItem = () => {
+    if(inputText === ''){
       return alert('请输入待办内容')
     }
-    if (this.props.onSubmit) {
-      this.props.onSubmit({
-        id:( new Date()).valueOf(),
-        content:this.state.inputText,
+
+    if (props.onSubmit) {
+      props.onSubmit({   //hook里面的props
+        id:(new Date()).valueOf(),
+        content:inputText,
         isFinish:false,
       })
     }
-    this.setState({ inputText: '' })
+    setInputText('')
   }
 
-  
-  handleKeyEnter(event){
-    if(event.keyCode === 13) {
-      this.toAddItem()
+  const handleKeyEnter = (e) => {
+    if(e.keyCode === 13) {
+      toAddItem()
     }
   }
 
-  handleInputChange(event){
+  const handleInputChange = (event) => {
     const inputText = event.target.value
-    this.setState({inputText})
-    this.props.updateFilterKey(inputText)
+    setInputText(inputText)
+    props.updateFilterKey(inputText)
   }
 
-  render () {
-    return(
-      <div className="search_input">
-        <div className="search_input_left icon iconfont icon-search"></div>
-        <div className="search_input_textContainer">
-          <input
-            type="text"
-            placeholder="搜索/回车或右侧添加"
-            id="search_input"
-            className="search_input_text"
-            value={this.state.inputText}
-            onChange={this.handleInputChange.bind(this)}
-            onKeyUp={this.handleKeyEnter.bind(this)}/>
+  return(
+    <div className="search_input">
+      <div className="search_input_left icon iconfont icon-search"></div>
+      <div className="search_input_textContainer">
+        <input
+          type="text"
+          placeholder="搜索/回车或右侧添加"
+          id="search_input"
+          className="search_input_text"
+          value={inputText}
+          onChange={handleInputChange}
+          onKeyUp={handleKeyEnter}/>
 
-          <div 
-            className="search_input_right icon iconfont icon-add btn" 
-            onClick={this.toAddItem.bind(this)}
-          ></div>
-        </div>
-    </div>
-    )
-  }
+        <div 
+          className="search_input_right icon iconfont icon-add btn" 
+          onClick={toAddItem}
+        ></div>
+      </div>
+  </div>
+  )
 }
 
 export default TodoInput

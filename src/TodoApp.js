@@ -4,12 +4,12 @@ import TodoList from './TodoList.js'
 
 var listStorage = {
   fetch: function() {
-    var list = JSON.parse(localStorage.getItem("todoList") || "[]");
+    var list = JSON.parse(localStorage.getItem("todoList4") || "[]");
     console.log("get localStorage:",list)
     return list;
   },
   save: function(list) {
-    localStorage.setItem("todoList", JSON.stringify(list));
+    localStorage.setItem("todoList4", JSON.stringify(list));
     console.log("save localStorage:",list)
   }
 };
@@ -54,7 +54,7 @@ const TodoApp = () => {
       }
       return item
     })
-    console.log("new list:",list)
+    console.log("update list:",list)
     setTodoList(list)
     _saveTodoList(list)
   }
