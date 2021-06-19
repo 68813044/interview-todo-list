@@ -1,23 +1,26 @@
 import React, { useState,useEffect } from 'react'
+import TodoCategory from './TodoCategory.js';
 import TodoInput from './TodoInput.js'
 import TodoList from './TodoList.js'
 
 var listStorage = {
   fetch: function() {
-    var list = JSON.parse(localStorage.getItem("todoList4") || "[]");
+    var list = JSON.parse(localStorage.getItem("todoList") || "[]");
     console.log("get localStorage:",list)
     return list;
   },
   save: function(list) {
-    localStorage.setItem("todoList4", JSON.stringify(list));
+    localStorage.setItem("todoList", JSON.stringify(list));
     console.log("save localStorage:",list)
   }
 };
 
 
 const TodoApp = () => {
+
   const [todoList,setTodoList] = useState([])
   const [filterKey,setFilterKey] = useState('')
+  const [filterOption,setFilterOption] = useState('all')
 
   useEffect(() => {
     const temp = listStorage.fetch()
@@ -63,6 +66,10 @@ const TodoApp = () => {
     setFilterKey(filterKey)
   }
 
+  const changeOption = (filterOption) => {
+    setFilterOption(filterOption)
+  }
+
   return (
     <div className="main">
       <div className="title">My Todo List</div>
@@ -71,9 +78,15 @@ const TodoApp = () => {
         updateFilterKey={updateFilterKey}
         onSubmit={addItem}/> 
 
+      <TodoCategory
+        filterOption={filterOption}
+        onChangeOption={changeOption}
+        />
+
       <TodoList 
         todoList={todoList}
         filterKey={filterKey}
+        filterOption={filterOption}
         onDeleteItem={deleteItem}
         onUpdateItem={updateItem}/>
     </div>

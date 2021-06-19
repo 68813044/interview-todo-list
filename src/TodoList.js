@@ -4,11 +4,19 @@ import TodoItem from './TodoItem.js'
 const TodoList = (props) => {
 
   const todoList = props.todoList
+  const filterKey = props.filterKey
+  const filterOption = props.filterOption
 
   const todoListElements = []
+
+  const judgeOption = (item) => {
+    if(filterOption === 'all') return true
+    return filterOption === 'isFinish'?item.isFinish:!item.isFinish
+  }
+
   for (let i = 0; i < todoList.length; i++) {
     const item = todoList[i];
-    if(item.content.indexOf(props.filterKey) !== -1){
+    if(judgeOption(item) && item.content.indexOf(filterKey) !== -1){
       todoListElements.push(
         <TodoItem 
         todoItem={item}
