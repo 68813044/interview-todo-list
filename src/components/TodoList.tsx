@@ -1,18 +1,13 @@
 import React from 'react'
 import TodoItem from './TodoItem'
+import {ITodoItemObj} from '../interface'
 
 interface Props{
-  todoList:todoItemObj[],
+  todoList:ITodoItemObj[],
   filterKey:string,
   filterOption:string,
   onDeleteItem:onDeleteItemFnc,
   onUpdateItem:onUpdateItemFnc
-}
-
-interface todoItemObj{
-  content:string,
-  isFinish:boolean,
-  id:number,
 }
 
 interface onDeleteItemFnc{
@@ -25,13 +20,13 @@ interface onUpdateItemFnc{
 
 const TodoList = (props:Props) => {
 
-  const todoList = props.todoList
-  const filterKey = props.filterKey
-  const filterOption = props.filterOption
+  const {
+    todoList,filterKey,filterOption,onDeleteItem,onUpdateItem
+  } = props
 
   const todoListElements = []
 
-  const judgeOption = (item:todoItemObj) => {
+  const judgeOption = (item:ITodoItemObj) => {
     if(filterOption === 'all') return true
     return filterOption === 'isFinish'?item.isFinish:!item.isFinish
   }
@@ -44,8 +39,8 @@ const TodoList = (props:Props) => {
         todoItem={item}
         key={item.id}
         index={i}
-        onDeleteItem={props.onDeleteItem}
-        onUpdateItem={props.onUpdateItem}
+        onDeleteItem={onDeleteItem}
+        onUpdateItem={onUpdateItem}
       />
       )
     }

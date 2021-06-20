@@ -15,7 +15,7 @@ const TodoCategory = (props:Props) => {
 
   const toChangeOption = (e:React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     // console.log(e.target.id)   //err:https://stackoverflow.com/questions/42066421/property-value-does-not-exist-on-type-eventtarget
-    const target = e.target as HTMLTextAreaElement
+    const target = e.target as HTMLTextAreaElement  //类型断言
     props.onChangeOption(target.id)
   }
 
