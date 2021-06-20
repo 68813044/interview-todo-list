@@ -1,7 +1,13 @@
 import React, { useState,useEffect } from 'react'
-import TodoCategory from './TodoCategory.js';
-import TodoInput from './TodoInput.js'
-import TodoList from './TodoList.js'
+import TodoCategory from './TodoCategory'
+import TodoInput from './TodoInput'
+import TodoList from './TodoList'
+
+interface todoItemObj{
+  content:string,
+  isFinish:boolean,
+  id:number,
+}
 
 var listStorage = {
   fetch: function() {
@@ -9,16 +15,15 @@ var listStorage = {
     console.log("get localStorage:",list)
     return list;
   },
-  save: function(list) {
+  save: function(list:todoItemObj[]) {
     localStorage.setItem("todoList", JSON.stringify(list));
     console.log("save localStorage:",list)
   }
 };
 
-
 const TodoApp = () => {
 
-  const [todoList,setTodoList] = useState([])
+  const [todoList,setTodoList] = useState<todoItemObj[]>([])
   const [filterKey,setFilterKey] = useState('')
   const [filterOption,setFilterOption] = useState('all')
 
@@ -27,11 +32,11 @@ const TodoApp = () => {
     setTodoList(temp)
   }, [])
 
-  const _saveTodoList = (todoList) => {
+  const _saveTodoList = (todoList:todoItemObj[]) => {
     listStorage.save(todoList)
   }
 
-  const addItem = (todoItem) => {
+  const addItem = (todoItem:todoItemObj) => {
     console.log("addItem：",todoItem)
     const list = [
       ...todoList,
@@ -42,16 +47,17 @@ const TodoApp = () => {
     _saveTodoList(list)
   }
 
-  const deleteItem = (index) => {
-    const list = todoList.filter((item,i) => {
+  const deleteItem = (index:number) => {
+    const list = todoList.filter((item:todoItemObj,i) => {
       return i!==index
     })
+    console.log("delete list:",list)
     setTodoList(list)
     _saveTodoList(list)
   }
 
-  const updateItem = (index) => {
-    const list = todoList.map((item,i) => {
+  const updateItem = (index:number) => {
+    const list = todoList.map((item:todoItemObj,i) => {
       if(i === index){
         item.isFinish = !item.isFinish
       }
@@ -62,11 +68,12 @@ const TodoApp = () => {
     _saveTodoList(list)
   }
 
-  const updateFilterKey = (filterKey) => {
+  const updateFilterKey = (filterKey:string) => {
+    // console.log("updateFilterKey:",filterKey)
     setFilterKey(filterKey)
   }
 
-  const changeOption = (filterOption) => {
+  const changeOption = (filterOption:string) => {
     setFilterOption(filterOption)
   }
 
@@ -89,6 +96,7 @@ const TodoApp = () => {
         filterOption={filterOption}
         onDeleteItem={deleteItem}
         onUpdateItem={updateItem}/>
+
     </div>
   )
 }

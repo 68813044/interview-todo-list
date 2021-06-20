@@ -1,6 +1,25 @@
 import React, { useState } from 'react'
 
-const TodoInput = (props) => {
+interface propsObj{
+  updateFilterKey:updateFilterKeyFnc,
+  onSubmit:onSubmitFnc
+}
+
+interface updateFilterKeyFnc{
+  (inputText:string):void
+}
+
+interface onSubmitFnc{
+  (todoItem:todoItemObj):void
+}
+
+interface todoItemObj{
+  content:string,
+  isFinish:boolean,
+  id:number,
+}
+
+const TodoInput = (props:propsObj) => {
   
   const [inputText,setInputText] = useState('')
 
@@ -10,7 +29,7 @@ const TodoInput = (props) => {
     }
 
     if (props.onSubmit) {
-      props.onSubmit({   //hook里面的props
+      props.onSubmit({
         id:(new Date()).valueOf(),
         content:inputText,
         isFinish:false,
@@ -19,13 +38,14 @@ const TodoInput = (props) => {
     setInputText('')
   }
 
-  const handleKeyEnter = (e) => {
-    if(e.keyCode === 13) {
+  const handleKeyEnter = (event:React.KeyboardEvent<HTMLInputElement>) => {
+    if(event.code === 'Enter') {
       toAddItem()
     }
   }
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    // console.log('input:',event.target.value)
     const inputText = event.target.value
     setInputText(inputText)
     props.updateFilterKey(inputText)

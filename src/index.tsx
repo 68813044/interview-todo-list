@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/style.css';
-import './css/fonts/iconfont.css';
 import TodoApp from './TodoApp';
+import './css/fonts/iconfont.css';
 
 ReactDOM.render(
   <React.StrictMode>
