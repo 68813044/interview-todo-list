@@ -2,6 +2,8 @@ import React, { useState,useEffect } from 'react'
 import TodoCategory from './TodoCategory'
 import TodoInput from './TodoInput'
 import TodoList from './TodoList'
+import Test from './test'
+
 
 interface todoItemObj{
   content:string,
@@ -79,6 +81,8 @@ const TodoApp = () => {
 
   return (
     <div className="main">
+      <Test />
+      
       <div className="title">My Todo List</div>
 
       <TodoInput 
